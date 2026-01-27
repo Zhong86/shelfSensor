@@ -1,0 +1,17 @@
+:root{
+  --primary: #F3E8DF; 
+  --secondary: #57595B;
+  --tertiary: #E8D1C5;
+  --header: #452829;
+}
+
+body {
+  width: 100%;
+  background-color: var(--primary); 
+}
+
+.header {
+  background-color: var(--header); 
+  color: var(--tertiary); 
+  font-size: 2rem; 
+}

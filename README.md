@@ -11,3 +11,13 @@
 - API: Google Books API <br>
 - Hosting Service: InfinityServer <br>
 - Scanner: QuaggaJS through CDN <br>
+
+### TODO FRONTEND <br>
+- Home <br>
+- Login <br>
+- Collections <br>
+- Barcode scanner <br>
+
+### TODO BACKEND <br>
+- SQL 
+- JWT? 
