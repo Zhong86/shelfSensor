@@ -8,7 +8,7 @@
 ## Tools <br>
 - HTML, CSS, JS, PHP <br>
 - Database: MySQL <br>
-- API: Google Books API <br>
+- API: OpenLibraryAPI <br>
 - Hosting Service: InfinityServer <br>
 - Scanner: QuaggaJS through CDN <br>
 
