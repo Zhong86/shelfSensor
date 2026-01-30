@@ -20,4 +20,4 @@
 
 ### TODO BACKEND <br>
 - SQL 
-- JWT? 
+- JWT
