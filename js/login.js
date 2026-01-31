@@ -89,16 +89,17 @@ function attachRegisHandler() {
     }
   }); 
 }
-
-document.getElementById('accountForm').addEventListener('click', (e) => {
-  if (e.target.classList.contains('toggle-link')) {
-    e.preventDefault(); 
-    const target = e.target.dataset.target; 
-    switchForm(target); 
-  }
-}); 
-
 document.addEventListener('DOMContentLoaded', () => {
+  const accForm  = document.getElementById('accountForm'); 
+  if (!accForm) return; 
+
+  accForm.addEventListener('click', (e) => {
+    if (e.target.classList.contains('toggle-link')) {
+      e.preventDefault(); 
+      const target = e.target.dataset.target; 
+      switchForm(target); 
+    }
+  }); 
   switchForm('login'); 
 }); 
 

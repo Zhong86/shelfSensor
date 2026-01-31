@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="../styles.css">
-  <title>Document</title>
+  <title>Login Page</title>
 </head>
 <body>
-  <?php include '../components/header.php' ?>
+  <?php include '../components/header.php'; ?>
   <!-- BODY -->
-  <div class='row mt-5 px-5' id='accountForm'></div>
+  <div class='row mt-5 px-5 w-100' id='accountForm'></div>
 
   <!-- TEMPLATES FOR LOGIN & REGISTER -->
   <template id='loginTemplate'>
@@ -62,8 +62,9 @@
     </div>
   </template>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src='../js/nav.js'></script>
+<script src="../js/genreFilter.js"></script>
 <script src='../js/login.js'></script>
-<script src='/js/nav.js'></script>
-<script src="/js/genreFilter.js"></script>
 </body>
 </html>

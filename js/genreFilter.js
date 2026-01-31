@@ -14,6 +14,7 @@ genres.forEach(genre => {
 
   a.addEventListener('click', (e) => {
     e.preventDefault(); 
+    
     button.textContent = genre; 
   }); 
 

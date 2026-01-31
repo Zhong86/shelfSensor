@@ -10,7 +10,7 @@ async function getTopBooks() {
     if (topBooks.docs && topBooks.docs.length > 0) {
       displayBooks(topBooks.docs);
     } else {
-      container.innerHTML = '<p class="text-muted">No books found.</p>';
+      recommendContainer.innerHTML = '<p class="text-muted">No books found.</p>';
     }
   } catch (error) {
     console.error('Failed to get Top books', error);
@@ -18,7 +18,7 @@ async function getTopBooks() {
 }
 
 function displayBooks(books) {
-  recommendContainer.innerHtml = ''; 
+  recommendContainer.innerHTML = ''; 
 
   books.forEach(book => {
     const coverId = book.cover_i;

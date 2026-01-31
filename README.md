@@ -17,7 +17,7 @@
 - Login <br>
 - Collections <br>
 - Barcode scanner <br>
+- Filter <br>
 
 ### TODO BACKEND <br>
-- SQL 
-- JWT
+- !JWT & Login system
