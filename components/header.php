@@ -12,8 +12,10 @@
     </div>
   </div>
   <div class='navBar'>
-    <button onclick="navigate('recommend')">RECOMMENDED</button>
-    <button onclick="navigate('login')">LOGIN</button>
+    <button id='recommendNav' class='navBtn'>RECOMMENDED</button>
+    <button id='collectionsNav' class='navBtn'>COLLECTIONS</button>
+    <button id='accountNav' class='navBtn'>ACCOUNT</button>
+    <button id='scanNav' class='navBtn'>SCAN</button>
   </div>
 </div> 
 

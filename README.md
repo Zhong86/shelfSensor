@@ -14,10 +14,14 @@
 
 ### TODO FRONTEND <br>
 - Home <br>
-- Login <br>
+- Login DESIGN <br>
 - Collections <br>
 - Barcode scanner <br>
 - Filter <br>
 
 ### TODO BACKEND <br>
-- !JWT & Login system
+- Relational DB Diagram
+- Secure Allow Origins: Auth
+- Secure credentials (sessions & cookies when req API)
+- Secure SQL q
+- Save book

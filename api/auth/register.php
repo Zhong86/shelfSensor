@@ -1,7 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-require_once '../config/config.php'; 
+//DELETE WHEN LAUNCh
+ini_set('display_errors', 1); 
+error_reporting(E_ALL); 
+
+session_start(); 
+require_once '/config/config.php'; 
 
 header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: *'); 
@@ -42,6 +45,9 @@ $hashedPass = password_hash($password, PASSWORD_DEFAULT);
 $insertQ = "INSERT INTO users (username, password) VALUES ('$username', '$hashedPass')";
 
 if ($conn->query($insertQ) === TRUE) {
+  $_SESSION['user_id'] = $conn->insert_id; 
+  $_SESSION['username'] = $username; 
+
   echo json_encode([
     'success' => true, 
     'message' => 'User registered successfully', 

@@ -18,6 +18,10 @@ body {
   font-size: 2rem; 
 }
 
+.navBtn {
+  font-size: 1rem; 
+}
+
 /* TEXT LINK */
 .toggle-link {
   color: #007bff;

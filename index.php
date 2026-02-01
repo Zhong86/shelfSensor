@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <title>Book Manager</title>
   </head>
-
   <body>
   <?php include './components/header.php'; ?>
 
