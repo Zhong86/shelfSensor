@@ -31,8 +31,10 @@ if (!$input || !isset($input['username']) || !isset($input['password'])) {
 $username = $conn->real_escape_string($input['username']); 
 $password = $input['password']; 
 
-$q = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
-$result = $conn->query($q); 
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
+$stmt->bind_param("s", $username); 
+$stmt->execute(); 
+$result = $stmt->get_result(); 
 
 if ($result->num_rows > 0) {
   $user = $result->fetch_assoc(); 

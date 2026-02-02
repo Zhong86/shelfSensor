@@ -29,8 +29,10 @@ if (!$input || !isset($input['username']) || !isset($input['password'])) {
 $username = $conn->real_escape_string($input['username']); 
 $password = $input['password'];
 
-$checkQ = "SELECT id FROM users WHERE username = '$username' LIMIT 1";
-$checkResult = $conn->query($checkQ); 
+$stmt = $conn->prepare("SELECT id FROM users WHERE username = ? LIMIT 1");
+$stmt->bind_param('s', $username); 
+$stmt->execute();
+$checkResult = $stmt->get_result(); 
 
 if ($checkResult->num_rows > 0) {
   echo json_encode([
@@ -42,9 +44,11 @@ if ($checkResult->num_rows > 0) {
 
 $hashedPass = password_hash($password, PASSWORD_DEFAULT); 
 
-$insertQ = "INSERT INTO users (username, password) VALUES ('$username', '$hashedPass')";
+$stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)";
+$stmt->bind_param("ss", $username, $hashedPass); 
+$stmt->execute(); 
 
-if ($conn->query($insertQ) === TRUE) {
+if ($stmt->get_result() === TRUE) {
   $_SESSION['user_id'] = $conn->insert_id; 
   $_SESSION['username'] = $username; 
 

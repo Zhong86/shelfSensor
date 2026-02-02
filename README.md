@@ -18,9 +18,9 @@
 - Collections <br>
 - Barcode scanner <br>
 - Filter <br>
+- Loading wheel <br>
 
 ### TODO BACKEND <br>
-- Relational DB Diagram
 - Secure Allow Origins: Auth
 - Secure credentials (sessions & cookies when req API)
 - Secure SQL q
