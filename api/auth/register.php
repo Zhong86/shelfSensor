@@ -44,7 +44,7 @@ if ($checkResult->num_rows > 0) {
 
 $hashedPass = password_hash($password, PASSWORD_DEFAULT); 
 
-$stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)";
+$stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 $stmt->bind_param("ss", $username, $hashedPass); 
 $stmt->execute(); 
 

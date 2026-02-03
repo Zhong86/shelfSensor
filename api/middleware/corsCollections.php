@@ -4,7 +4,7 @@ $allowedOrigins = [
   'http://localhost:3000/pages/collectionsPage.php'
 ]; 
 
-$origin isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 
 if (in_array($origin, $allowedOrigins)) {
   header("Access-Control-Allow-Origin: $origin"); 

@@ -21,7 +21,7 @@
 - Loading wheel <br>
 
 ### TODO BACKEND <br>
-- Secure Allow Origins: Auth
-- Secure credentials (sessions & cookies when req API)
-- Secure SQL q
-- Save book
+- Add genres to TABLE <br>
+- Secure Allow Origins: Auth <br>
+- Secure credentials (sessions & cookies when req API) <br>
+- Save book <br>

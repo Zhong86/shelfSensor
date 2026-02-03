@@ -33,6 +33,6 @@ if ($result->num_rows > 0) {
 $status = $input['status']; 
 $notes = isset($input['notes']) ? $input['notes'] : ''; 
 $stmt = $conn->prepare("INSERT INTO user_books (user_id, book_id, status, notes)"); 
-$stmt = bind_param("isss", $user_id, $book['key'], $status, $notes);
+$stmt->bind_param("isss", $user_id, $book['key'], $status, $notes);
 $stmt->execute();
 ?>
