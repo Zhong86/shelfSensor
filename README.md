@@ -14,7 +14,7 @@
 
 ### TODO FRONTEND <br>
 - Home <br>
-- Login DESIGN <br>
+- Login LOGO <br>
 - Collections <br>
 - Barcode scanner <br>
 - Filter <br>
