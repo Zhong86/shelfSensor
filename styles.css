@@ -2,7 +2,6 @@
   --primary: #F3E8DF; 
   --secondary: #57595B;
   --tertiary: #8b6f47;
-  --header: #8b6f47;
 }
 
 body {
@@ -11,12 +10,34 @@ body {
   height: 100%;
   background-color: var(--primary); 
   font-size: 18px;
+  font-weight: 500;
+  color: var(--tertiary);
 }
 
 .header {
-  background-color: var(--header); 
+  background-color: var(--tertiary); 
   color: white; 
   font-size: 2rem; 
+}
+
+.hero {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('public/library.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4); /* Darkens image only (0.0=black, 1.0=normal) */
+  z-index: 1;
 }
 
 .navBtn {
@@ -25,7 +46,6 @@ body {
 
 .loginCard {
   width: 500px;
-  height: 650px;
   background: white;
   border-radius: 24px;
   color: var(--tertiary);
@@ -34,7 +54,7 @@ body {
 }
 
 .acc-input{
-  border: 3px solid var(--header) !important;
+  border: 3px solid var(--tertiary) !important;
   border-radius: 8px;
   height: 50px;
 }
@@ -42,23 +62,27 @@ body {
 .acc-btn {
   color: white; 
   transition: filter 0.2s ease;
+  background-color:var(--tertiary);
+  border:none;
+  font-weight:bold;
   filter: brightness(1); 
 }
 .acc-btn:hover{
   color: white; 
+  background-color:var(--tertiary);
   filter: brightness(0.8); 
 }
 
 .google-btn {
   font-size:1.2rem;
-  border: 1px solid var(--header); 
-  color: var(--header);
+  border: 1px solid var(--tertiary); 
+  color: var(--tertiary);
   transition: filter 0.2s ease;
   filter: brightness(1); 
 }
 
 .google-btn:hover {
-  border: 1px solid var(--header); 
+  border: 1px solid var(--tertiary); 
   filter: brightness(0.8);
 }
 
@@ -71,4 +95,30 @@ body {
 .toggle-link:hover {
   color: var(--tertiary);
   text-decoration: underline; 
+}
+
+.dropdown-item:hover {
+  background-color: rgba(139, 111, 71, 0.1); 
+}
+
+.dropdown-item:active {
+  background-color: rgba(139, 111, 71, 0.2);
+}
+.genre-checkbox {
+  border-color: var(--tertiary) !important;
+}
+
+.genre-checkbox:checked {
+  background-color: var(--tertiary) !important;
+  border-color: var(--tertiary) !important;
+}
+
+.genre-checkbox:focus {
+  border-color: var(--tertiary) !important;
+  box-shadow: 0 0 0 0.25rem rgba(139, 111, 71, 0.25) !important;
+}
+
+/* Hover effect */
+.genre-checkbox:hover {
+  border-color: var(--tertiary) !important;
 }

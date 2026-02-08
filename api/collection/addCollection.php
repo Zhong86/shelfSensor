@@ -1,6 +1,6 @@
 <?php
-require_once '/api/middleware/corsCollections.php'; 
-require_once '/config/config.php'; 
+require_once '../middleware/corsCollections.php'; 
+require_once __DIR__ . '/../../config/config.php';
 require_once './checkBook.php';
 
 $input = json_decode(file_get_contents('php://input'), true); 

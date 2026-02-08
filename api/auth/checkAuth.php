@@ -2,7 +2,7 @@
 session_start(); 
 
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
-  require_once '/config/config.php';
+  require_once __DIR__ . '/../../config/config.php';
 
   $token = $_COOKIE['remember_token']; 
   $hashedToken = hash('sha256', $token); 

@@ -13,12 +13,14 @@
 - Scanner: QuaggaJS through CDN <br>
 
 ### TODO FRONTEND <br>
+- Register: fav genre <br>
 - Home <br>
-- Login LOGO <br>
+- Loading wheel <br>
+- Filter <br>
 - Collections <br>
 - Barcode scanner <br>
-- Filter <br>
-- Loading wheel <br>
+- Header & Footer <br>
+- Login LOGO <br>
 
 ### TODO BACKEND <br>
 - Add genres to TABLE <br>

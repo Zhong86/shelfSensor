@@ -33,10 +33,10 @@
             <input type="text" id='password' name="password" class='form-control acc-input mt-2' placeholder='Input your password...' required>
           </div>
           <div class='d-flex justify-content-center mb-4'>
-            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;background-color:var(--tertiary);font-weight:bold;border:none;'>Log In</button>
+            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;'>Log In</button>
           </div>
         </form>
-        <hr style='border: 2px solid var(--header)'>
+        <hr style='border: 2px solid var(--tertiary)'>
         <button class='btn google-btn w-100 my-3'>Google</button>
         <div class='d-flex justify-content-center'>
           <button class='btn btn-link toggle-link' data-target='register' style='font-size:1rem;'>Don't have an account yet? Register</button>
@@ -49,28 +49,39 @@
       <p style='text-align:center; font-size:2rem; font-weight:bold'>Welcome</p>
       <p style='text-align:center; font-size:18px; font-weight:500;'>Join to monitor your favorite books</p>
       <div class='col px-4 mt-5' >
-        <form id='loginForm' style='font-size:24px;'>
+        <form id='registerForm' style='font-size:24px;'>
           <div class='form-group mb-4'>
             <div class='form-group mb-4'>
               <label for="username">Username</label>
               <input type="text" id='username' name="username" class='form-control acc-input mt-2' placeholder='Create a new username...' required>
             </div>
           </div>
-
           <div class='form-group mb-4'>
             <label for="password">Password</label>
             <input type="text" id='password' name="password" class='form-control acc-input mt-2' placeholder='Create a password...' required>
           </div>
-          <div class='d-flex justify-content-center mb-4'>
-            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;background-color:var(--tertiary);font-weight:bold;border:none;'>Sign Up</button>
+
+          <div class='d-flex justify-content-between gap-3'>
+            <span>Genres</span>
+            <div class='dropdown mb-4 w-50'>
+              <button class='btn acc-btn w-100' data-bs-toggle='dropdown'>
+                Your favorite genres...
+              </button>
+              <div id='genreCheckboxes' class='dropdown-menu overflow-scroll w-100' style='height:200px'></div>
+            </div>
           </div>
+
+          <div class='d-flex justify-content-center mb-4'>
+            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;'>Sign Up</button>
+          </div>
+
         </form>
-        <hr style='border: 2px solid var(--header)'>
+        <hr style='border: 2px solid var(--tertiary)'>
         <button class='btn google-btn w-100 my-3'>Google</button>
 
         <div class='d-flex justify-content-center'>
-          <button class='btn btn-link toggle-link' data-target='login' style='font-size:1rem;'>Already have an account?Log In</button>
-      </div>
+          <button class='btn btn-link toggle-link' data-target='login' style='font-size:1rem;'>Already have an account? Log In</button>
+        </div>
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
