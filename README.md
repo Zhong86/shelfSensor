@@ -13,9 +13,7 @@
 - Scanner: QuaggaJS through CDN <br>
 
 ### TODO FRONTEND <br>
-- Register: fav genre <br>
-- Home <br>
-- Loading wheel <br>
+- Home: AddBook input field (DESIGN) [INPUT FIELD]<br>
 - Filter <br>
 - Collections <br>
 - Barcode scanner <br>
@@ -23,7 +21,6 @@
 - Login LOGO <br>
 
 ### TODO BACKEND <br>
-- Add genres to TABLE <br>
 - Secure Allow Origins: Auth <br>
 - Secure credentials (sessions & cookies when req API) <br>
 - Save book <br>

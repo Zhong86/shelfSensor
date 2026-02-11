@@ -27,7 +27,6 @@ function attachLoginHandler() {
   const loginForm = document.getElementById('loginForm');
 
   if (!loginForm) return; 
-login
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault(); 
 

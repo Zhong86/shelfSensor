@@ -1,3 +1,5 @@
+import { addBook } from './bookFunc.js';
+
 const recommendContainer = document.getElementById('recommended'); 
 const loading = document.getElementById('loadingSpinner');
 
@@ -33,21 +35,47 @@ function displayBooks(books) {
       : 'https://via.placeholder.com/128x192?text=No+Cover';
 
     const card = document.createElement('div'); 
-    card.className= 'col mb-3'; 
+    card.className= 'col-4 mb-3'; 
     card.innerHTML = `
-<div class='box d-flex flex-column gap-3 h-100'>
+<div class='card d-flex h-100'>
   <img src="${coverUrl}" class='card-img-top' alt="${book.title}" 
-    style="height: 400px; object-fit: cover;
-    border:4px solid var(--tertiary); border-radius:8px"
+    style="height: 550px; object-fit: cover;"
   >
-  <div class=''>
-    <h4 style="text-align:center; font-weight:bold;">${book.title}</h4>
+  <div class='card-body d-flex justify-content-between'>
+    <div class='col-9 d-flex flex-column'>
+      <h4 style="font-weight:bold;">${book.title}</h4>
+      <p style="font-weight:bold;">${book.author_name[0]}</p>
+    </div>
+    <div class='col d-flex justify-content-center align-items-center'>
+      <button type='submit' class='button card-btn add-book' data-key='${book.key}' data-title='${book.title}'>+</button>
+    </div>
   </div>
 </div>
 `; 
-
     recommendContainer.appendChild(card); 
   });
 }
+
+function showAddInput(key, title) {
+  const inputContainer = document.getElementById('addBookContainer');
+  if(!inputContainer) return; 
+  inputContainer.innerHTML = `
+<div class='card-header'>
+  <h4 style='text-align:center'>${title}</h4>
+
+</div>
+`; 
+  inputContainer.style.display = 'block';
+
+}
+
+recommendContainer.addEventListener('click', (e) => {
+  if(e.target.classList.contains('add-book')) {
+    const title = e.target.dataset.title;
+    const key = e.target.dataset.key;
+
+    showAddInput(key, title);
+  }
+}); 
 
 getTopBooks(); 

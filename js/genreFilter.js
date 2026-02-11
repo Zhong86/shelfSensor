@@ -6,17 +6,26 @@ const genres = [
 const container = document.getElementById('genreItems'); 
 const button = document.getElementById('genreFilterButton'); 
 
-genres.forEach(genre => {
-  const a = document.createElement('a'); 
-  a.className = 'dropdown-item';
-  a.href = '#'; 
-  a.textContent = genre; 
+async function genreList() {
+  const response = await fetch('/api/collection/getGenres.php');
+  const result = await response.json();
 
-  a.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    
-    button.textContent = genre; 
-  }); 
+  result.genres.forEach(genre => {
+    const a = document.createElement('a'); 
+    a.className = 'dropdown-item';
+    a.href = '#'; 
+    a.textContent = genre.name; 
 
-  container.appendChild(a); 
-});
+    a.addEventListener('click', (e) => {
+      e.preventDefault(); 
+
+      button.textContent = genre.name; 
+    }); 
+
+    container.appendChild(a); 
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  genreList();
+}); 

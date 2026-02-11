@@ -1,7 +1,9 @@
 <?php
 $allowedOrigins = [
+  'http://localhost:3000',
   'http://localhost:3000/index.php', 
-  'http://localhost:3000/pages/collectionsPage.php'
+  'http://localhost:3000/pages/collectionsPage.php',
+  'http://localhost:3000/pages/loginPage.php'
 ]; 
 
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
