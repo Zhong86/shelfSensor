@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../middleware/corsCollections.php'; 
 require_once __DIR__ . '/../../config/config.php';
 require_once './checkBook.php';
@@ -16,6 +17,8 @@ if (!$input && !isset($input['book']) ) {
 $user_id = $_SESSION['user_id']; 
 $book = $input['book']; 
 
+findBookinDb($conn, $book);
+
 $stmt = $conn->prepare("SELECT * FROM user_books WHERE user_id = ? AND book_id = ?"); 
 $stmt->bind_param("is", $user_id, $book['key']); 
 $stmt->execute(); 
@@ -32,7 +35,18 @@ if ($result->num_rows > 0) {
 //WORK ON GENRE IMPLEMENTATION
 $status = $input['status']; 
 $notes = isset($input['notes']) ? $input['notes'] : ''; 
-$stmt = $conn->prepare("INSERT INTO user_books (user_id, book_id, status, notes)"); 
+$stmt = $conn->prepare("INSERT INTO user_books (user_id, book_id, status, notes) VALUES (?,?,?,?)"); 
 $stmt->bind_param("isss", $user_id, $book['key'], $status, $notes);
-$stmt->execute();
+if ($stmt->execute()) {
+  echo json_encode([ 
+    'success' => true, 
+    'message' => 'Added book successfully'
+  ]);
+} else {
+  echo json_encode([
+    'success' => false, 
+    'message' => 'Failed to add book into collection'
+  ]);
+}
+$stmt->close(); 
 ?>

@@ -1,4 +1,5 @@
 # Book Manager <br>
+## DROPPING PROJECT TO CHANGE BACKEND TO JAVA: learning system design first
 ## Functions <br>
 - Shows collection of books <br>
 - Tracks current reading , done reading, and going to read books <br>
@@ -6,10 +7,9 @@
 - Add personal note to the read books <br>
 
 ## Tools <br>
-- HTML, CSS, JS, PHP <br>
+- HTML, CSS, JS, JAVA Backend <br>
 - Database: MySQL <br>
 - API: OpenLibraryAPI <br>
-- Hosting Service: InfinityServer <br>
 - Scanner: QuaggaJS through CDN <br>
 
 ### TODO FRONTEND <br>

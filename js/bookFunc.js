@@ -1,12 +1,16 @@
 export async function addBook(key, data) {
   const bookFetch = await fetch(`https://openlibrary.org${key}.json`);
   const book = await bookFetch.json(); 
-  console.log(book); 
+  console.log(book, data); 
 
   const response = await fetch('/api/collection/addCollection.php', {
     method: 'POST', 
     headers: { 'Content-Type': 'application/json' }, 
-    body: { book: JSON.stringify(book) }
+    body: JSON.stringify({ 
+      book: book,
+      status: data.status, 
+      notes: data.notes
+    })
   });
 
   const result = await response.json(); 

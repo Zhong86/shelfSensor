@@ -60,21 +60,66 @@ function showAddInput(key, title) {
   const inputContainer = document.getElementById('addBookContainer');
   if(!inputContainer) return; 
   inputContainer.innerHTML = `
-<div class='card-header'>
-  <h4 style='text-align:center'>${title}</h4>
-
+<div style='width:85%'>
+  <p style='text-align:center;font-weight:bold;font-size:2rem'>${title}</p>
+  <hr style='border-2 border-secondary w-75 mx-auto my-4'>
+  <form id='addBookForm' style='font-size:1rem;' data-status=''>
+    <div class='d-flex mb-3 align-items-center justify-content-between'>
+      <span>Status</span>
+      <div class='dropdown'>
+        <button class='btn brown-btn w-100' data-bs-toggle='dropdown'>
+          Status
+        </button>
+        <ul id='statusDropdown' class='dropdown-menu'>
+          <li ><a class='dropdown-item' data-status='reading' href='#'>Reading</a></li>
+          <li ><a class='dropdown-item' data-status='to_read' href='#'>Read later</a></li>
+          <li ><a class='dropdown-item' data-status='completed' href='#'>Finished Reading</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class='form-group mb-4'>
+      <label for='notes'>Notes</label>
+      <textarea class='form-control mt-1' id='notes' name='notes' rows='5' placeholder='Start adding notes for this book! '></textarea>
+    </div>
+    <div class='d-flex justify-content-center'>
+      <button class='btn brown-btn w-50'>Add Book</button>
+    </div>
+  </form>
 </div>
 `; 
-  inputContainer.style.display = 'block';
 
+  inputContainer.style.display = 'flex';
+  inputContainer.addEventListener('click', (e) => {
+    if(e.target.classList.contains('dropdown-item')) {
+      e.preventDefault();
+      const status = e.target.dataset.status;
+      e.target.closest('.dropdown').querySelector('button').textContent = e.target.textContent;
+      document.querySelector('#addBookForm').dataset.status = status;
+    }
+  }); 
+
+  document.getElementById('addBookForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = e.currentTarget.dataset.status;
+    const notes = document.getElementById('notes').value;
+
+    await addBook(key, {status, notes});
+    
+    inputContainer.style.display = 'none';
+  }); 
 }
 
-recommendContainer.addEventListener('click', (e) => {
+recommendContainer.addEventListener('click', async (e) => {
   if(e.target.classList.contains('add-book')) {
     const title = e.target.dataset.title;
     const key = e.target.dataset.key;
-
-    showAddInput(key, title);
+    
+    const response = await fetch('/api/auth/checkSession.php');
+    const user = await response.json();
+    if(user.loggedIn) { 
+      showAddInput(key, title); 
+    }
+    else alert('Log in to add books to your collection');
   }
 }); 
 

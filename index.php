@@ -35,7 +35,7 @@
     </div>
 
     <!-- ADD BOOK INPUT -->
-    <div class ='card bg-white input-add-book rounded shadow-lg' id='addBookContainer'>
+    <div class='container shadow-lg p-3 bg-white input-add-book rounded flex-column align-items-center ' id='addBookContainer' >
     </div>
 
     <script type='module' src='./js/recommend.js'></script>

@@ -40,7 +40,6 @@ function findBookInDb($conn, $book) {
   return true; 
 }
 
-//CLAUDE checkbook with genres line60
 function getGenres($book) {
   $genres = []; 
   
@@ -57,6 +56,7 @@ function getGenres($book) {
       'http' => ['timeout' => 5, 'user_agent' => 'ShelfSensor/1.0']
     ]); 
     $response = @file_get_contents($apiUrl, false, $context); 
+    echo $response;
     
     if ($response !== false) {
       $data = json_decode($response, true); 

@@ -33,7 +33,7 @@
             <input type="text" id='password' name="password" class='form-control acc-input mt-2' placeholder='Input your password...' required>
           </div>
           <div class='d-flex justify-content-center mb-4'>
-            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;'>Log In</button>
+            <button type="submit" class='btn brown-btn w-100' style='font-size:1.5rem;'>Log In</button>
           </div>
         </form>
         <hr style='border: 2px solid var(--tertiary)'>
@@ -64,7 +64,7 @@
           <div class='d-flex justify-content-between gap-3'>
             <span>Genres</span>
             <div class='dropdown mb-4 w-50'>
-              <button class='btn acc-btn w-100' data-bs-toggle='dropdown'>
+              <button class='btn brown-btn w-100' data-bs-toggle='dropdown'>
                 Your favorite genres...
               </button>
               <div id='genreCheckboxes' class='dropdown-menu overflow-scroll w-100' style='height:200px'></div>
@@ -72,7 +72,7 @@
           </div>
 
           <div class='d-flex justify-content-center mb-4'>
-            <button type="submit" class='btn acc-btn w-100' style='font-size:1.5rem;'>Sign Up</button>
+            <button type="submit" class='btn brown-btn w-100' style='font-size:1.5rem;'>Sign Up</button>
           </div>
 
         </form>
