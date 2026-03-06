@@ -1,0 +1,52 @@
+CREATE DATABASE IF NOT EXISTS ShelfSensor;
+use ShelfSensor;
+
+CREATE TABLE IF NOT EXISTS books (
+  id INT AUTO_INCREMENT PRIMARY KEY, 
+  title VARCHAR(255) NOT NULL, 
+  isbn VARCHAR(17) UNIQUE, 
+  published_year SMALLINT, 
+  description TEXT
+);
+
+CREATE TABLE IF NOT EXISTS authors (
+  id INT AUTO_INCREMENT PRIMARY KEY, 
+  first_name VARCHAR(20) NOT NULL, 
+  last_name VARCHAR(20), 
+  bio TEXT
+);
+
+CREATE TABLE IF NOT EXISTS genres (
+  id INT AUTO_INCREMENT PRIMARY KEY, 
+  name VARCHAR(20) UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY, 
+  name VARCHAR(50) NOT NULL, 
+  email VARCHAR(50), 
+  password VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+  id INT AUTO_INCREMENT PRIMARY KEY, 
+  user_id INT NOT NULL, 
+  book_id INT NOT NULL, 
+  rating INT NOT NULL CHECK (rating >= 0 AND rating <= 5),
+  content VARCHAR(255), 
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, 
+  FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+);
+
+
+---------------- JUNCTION TABLES
+CREATE TABLE IF NOT EXISTS book_authors(
+  book_id INT REFERENCES books(id) ON DELETE CASCADE, 
+  author_id INT REFERENCES authors(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS book_genres(
+  book_id INT REFERENCES books(id) ON DELETE CASCADE, 
+  genre_id INT REFERENCES genres(id) ON DELETE CASCADE
+);
