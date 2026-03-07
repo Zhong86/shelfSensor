@@ -1,5 +1,7 @@
 package com.zhong.app.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.zhong.app.users.dto.CreateUserRequest;
@@ -8,7 +10,11 @@ import com.zhong.app.users.dto.UserResponse;
 
 @Service
 public class UserService {
+
   private final UserRepository userRepository;
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -30,7 +36,8 @@ public class UserService {
     User user = new User();
     user.setName(req.getName());
     user.setEmail(req.getEmail());
-    user.setPassword(req.getPassword());
+    String hashed = passwordEncoder.encode(req.getPassword());
+    user.setPassword(hashed);
 
     User saved = userRepository.save(user);
 
@@ -47,7 +54,8 @@ public class UserService {
       .orElseThrow(() -> new RuntimeException("User not found"));
 
     existing.setName(user.getName());
-    existing.setPassword(user.getPassword());
+    String hashed = passwordEncoder.encode(user.getPassword());
+    existing.setPassword(hashed);
 
     User saved = userRepository.save(existing);
     
