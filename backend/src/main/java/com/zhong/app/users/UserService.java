@@ -28,6 +28,7 @@ public class UserService {
     response.setId(user.getId());
     response.setName(user.getName());
     response.setEmail(user.getEmail());
+    response.setRole(user.getRole());
 
     return response;
   }
@@ -36,6 +37,7 @@ public class UserService {
     User user = new User();
     user.setName(req.getName());
     user.setEmail(req.getEmail());
+    user.setRole("USER");
     String hashed = passwordEncoder.encode(req.getPassword());
     user.setPassword(hashed);
 
@@ -45,6 +47,7 @@ public class UserService {
     response.setId(saved.getId());
     response.setName(saved.getName());
     response.setEmail(saved.getEmail());
+    response.setRole(saved.getRole());
 
     return response;
   }
@@ -63,6 +66,7 @@ public class UserService {
     response.setId(saved.getId());
     response.setName(saved.getName());
     response.setEmail(saved.getEmail());
+    response.setRole(saved.getRole());
 
     return response;
   }

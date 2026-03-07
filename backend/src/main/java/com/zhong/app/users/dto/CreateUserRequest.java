@@ -4,7 +4,14 @@ public class CreateUserRequest {
   String name; 
   String email; 
   String password;
+  String role;
 
+  public String getRole() {
+    return role;
+  }
+  public void setRole(String role) {
+    this.role = role;
+  }
   public String getName() {
     return name;
   }

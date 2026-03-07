@@ -1,5 +1,7 @@
 package com.zhong.app.users;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,23 @@ public class User {
 
   @Column(nullable = false)
   String password; 
+
+  @Column(nullable = false)
+  String role;
+
+  @Column()
+  String refreshToken; 
+
+  @Column()
+  LocalDateTime refreshTokenExpiry;
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
 
   public User() {}
 
