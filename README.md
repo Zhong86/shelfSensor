@@ -1,10 +1,10 @@
 # BOOK MANAGER FULL STACK PROJECT  
 ## Frontend -> React  
-## Backend -> Springboot  
 
+## Backend -> Springboot  
 ### AUTHENTICATION  
     - Password hashing   
-    - JWT Tokens  
+    - JWT Tokens: DB & Cookies
     - CORS  
 ### API CALLS  
     - Users: CRUD  

@@ -1,22 +1,34 @@
-package com.zhong.app;
+package com.zhong.app.auth;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+@Service
 public class JwtService {
   @Value("${security.jwt.secret-key}")
   String secretKey;
   
   @Value("${security.jwt.expiration-time}")
   long EXPIRATION_MS;
+
+  public String generateRefreshToken() {
+    return UUID.randomUUID().toString();
+  }
+
+  public LocalDateTime getRefreshTokenExpiry() {
+    return LocalDateTime.now().plusDays(7);
+  }
 
   private SecretKey getSigningKey() {
     return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));

@@ -26,7 +26,9 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(50) NOT NULL, 
   email VARCHAR(50), 
   password VARCHAR(255), 
-  role VARCHAR(50) DEFAULT "USER"
+  role VARCHAR(50) DEFAULT "USER", 
+  refresh_token VARCHAR(512), 
+  refresh_token_expiry DATETIME
 );
 
 CREATE TABLE IF NOT EXISTS reviews (

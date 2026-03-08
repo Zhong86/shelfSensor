@@ -28,19 +28,11 @@ public class User {
   @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'USER'")
   String role;
 
-  @Column()
+  @Column(name = "refresh_token")
   String refreshToken; 
 
-  @Column()
+  @Column(name = "refresh_token_expiry")
   LocalDateTime refreshTokenExpiry;
-
-  public String getRole() {
-    return role;
-  }
-
-  public void setRole(String role) {
-    this.role = role;
-  }
 
   public User() {}
 
@@ -48,6 +40,14 @@ public class User {
     this.name = name;
     this.email = email;
     this.password = password;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
   }
 
   public int getId() {
@@ -80,5 +80,21 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getRefreshToken() {
+    return refreshToken;
+  }
+
+  public void setRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+  public LocalDateTime getRefreshTokenExpiry() {
+    return refreshTokenExpiry;
+  }
+
+  public void setRefreshTokenExpiry(LocalDateTime refreshTokenExpiry) {
+    this.refreshTokenExpiry = refreshTokenExpiry;
   }
 }

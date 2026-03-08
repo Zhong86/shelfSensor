@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.zhong.app.users.dto.CreateUserRequest;
+import com.zhong.app.auth.RegisterRequest;
 import com.zhong.app.users.dto.UpdateUserRequest;
 import com.zhong.app.users.dto.UserResponse;
 
@@ -33,7 +33,7 @@ public class UserService {
     return response;
   }
 
-  public UserResponse createUser(CreateUserRequest req) {
+  public UserResponse createUser(RegisterRequest req) {
     User user = new User();
     user.setName(req.getName());
     user.setEmail(req.getEmail());

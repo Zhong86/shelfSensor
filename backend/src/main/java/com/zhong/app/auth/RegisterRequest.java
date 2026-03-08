@@ -1,6 +1,6 @@
-package com.zhong.app.users.dto;
+package com.zhong.app.auth;
 
-public class CreateUserRequest {
+public class RegisterRequest {
   String name; 
   String email; 
   String password;
