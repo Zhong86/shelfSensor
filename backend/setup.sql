@@ -44,11 +44,18 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 
 ---------------- JUNCTION TABLES
+CREATE TABLE IF NOT EXISTS user_books(
+  user_id INT REFERENCES users(id) ON DELETE CASCADE, 
+  book_id INT REFERENCES books(id) ON DELETE CASCADE,
+  status VARCHAR(10) NOT NULL CHECK (status IN ('COMPLETED', 'READING', 'READ LATER')), 
+  favorite boolean DEFAULT FALSE, 
+  notes TEXT
+); 
+
 CREATE TABLE IF NOT EXISTS book_authors(
   book_id INT REFERENCES books(id) ON DELETE CASCADE, 
   author_id INT REFERENCES authors(id) ON DELETE CASCADE
 );
-
 CREATE TABLE IF NOT EXISTS book_genres(
   book_id INT REFERENCES books(id) ON DELETE CASCADE, 
   genre_id INT REFERENCES genres(id) ON DELETE CASCADE
