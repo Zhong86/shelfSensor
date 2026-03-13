@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS reviews (
 CREATE TABLE IF NOT EXISTS user_books(
   user_id INT REFERENCES users(id) ON DELETE CASCADE, 
   book_id INT REFERENCES books(id) ON DELETE CASCADE,
-  status VARCHAR(10) NOT NULL CHECK (status IN ('COMPLETED', 'READING', 'READ LATER')), 
+  status VARCHAR(10) NOT NULL CHECK (status IN ('COMPLETED', 'READING', 'READ_LATER')), 
   favorite boolean DEFAULT FALSE, 
   notes TEXT
 ); 
