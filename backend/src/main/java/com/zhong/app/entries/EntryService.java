@@ -2,6 +2,7 @@ package com.zhong.app.entries;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.zhong.app.books.Book;
@@ -21,10 +22,21 @@ public class EntryService {
     this.bookRepository = bookRepository;
   } 
 
-  public Page<EntryResponse> getEntries(int userId, int page, int size) {
+  public Page<EntryResponse> getEntries(int userId, int page, int size, String status, Boolean favorite, String genre) {
     PageRequest pageable = PageRequest.of(page, size);
-    Page<UserBookEntry> entries = entryRepository.findByUserId(userId, pageable)
-      .orElseThrow(() -> new RuntimeException("User not found"));
+    
+    //Filters for param
+    Specification<UserBookEntry> spec = Specification
+      .where(EntrySpecification.hasUserId(userId));
+    
+    if(status != null) 
+      spec = spec.and(EntrySpecification.hasStatus(UserBookEntry.ReadingStatus.valueOf(status)));
+    if(favorite != null) 
+      spec = spec.and(EntrySpecification.isFavorite(favorite));
+    if(genre != null) 
+      spec = spec.and(EntrySpecification.hasGenre(genre));
+
+    Page<UserBookEntry> entries = entryRepository.findAll(spec, pageable);
     return entries.map(entry -> setEntryResponseData(entry));
   }
 

@@ -26,12 +26,17 @@ public class EntryController {
   @GetMapping()
   public ResponseEntity<Page<EntryResponse>> GetEntries(
     @RequestParam(defaultValue = "0") int page, 
-    @RequestParam(defaultValue = "5") int size
+    @RequestParam(defaultValue = "5") int size, 
+    @RequestParam(required = false) String status, 
+    @RequestParam(required = false) Boolean favorite, 
+    @RequestParam(required = false) String genre
   ) {
     int userId = (int) SecurityContextHolder.getContext()
       .getAuthentication().getDetails();
  
-    return ResponseEntity.ok(entryService.getEntries(userId, page, size));
+    return ResponseEntity.ok(entryService.getEntries(
+      userId, page, size, status, favorite, genre
+    ));
   }
 
   @GetMapping("/{bookId}")
