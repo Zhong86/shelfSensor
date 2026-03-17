@@ -3,7 +3,6 @@ package com.zhong.app.books;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.boot.data.autoconfigure.web.DataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

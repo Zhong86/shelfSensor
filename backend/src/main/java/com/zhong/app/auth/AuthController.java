@@ -35,7 +35,7 @@ public class AuthController {
   @PostMapping("/register")
   public ResponseEntity<Map<String,String>> register(@RequestBody RegisterRequest user) {
     UserResponse newUser = userService.createUser(user);
-    Map<String, String> tokens = generateTokens(newUser.getEmail());
+    Map<String, String> tokens = generateTokens(newUser.getEmail(), newUser.getId());
     return ResponseEntity.status(HttpStatus.CREATED).body(tokens);
   }
 
@@ -45,7 +45,10 @@ public class AuthController {
     authManager.authenticate(
       new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword())
     );
-    Map<String, String> tokens = generateTokens(req.getEmail());
+    User user = userRepository.findByEmail(req.getEmail())
+      .orElseThrow(() -> new RuntimeException("User not found"));
+
+    Map<String, String> tokens = generateTokens(req.getEmail(), user.getId());
     return ResponseEntity.ok(tokens);
   }
 
@@ -59,12 +62,12 @@ public class AuthController {
     if (user.getRefreshTokenExpiry().isBefore(LocalDateTime.now())) 
       throw new RuntimeException("Refresh token expired");
 
-    String newAccessToken = jwtService.generateToken(user.getEmail());
+    String newAccessToken = jwtService.generateToken(user.getEmail(), user.getId());
     return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
   }
 
-  public Map<String, String> generateTokens(String email) {
-    String accessToken = jwtService.generateToken(email);
+  public Map<String, String> generateTokens(String email, int id) {
+    String accessToken = jwtService.generateToken(email, id);
     String refreshToken = jwtService.generateRefreshToken();
 
     User user = userRepository.findByEmail(email)

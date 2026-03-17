@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  int id; 
+  Integer id; 
 
   @Column(nullable = false)
   String name; 
@@ -50,11 +50,11 @@ public class User {
     this.role = role;
   }
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

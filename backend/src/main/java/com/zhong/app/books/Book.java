@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 public class Book {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Integer id;
 
   @Column(nullable = false)
   private String title;
@@ -59,11 +59,11 @@ public class Book {
     this.genres = genres; 
   }
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

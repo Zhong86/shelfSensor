@@ -34,9 +34,10 @@ public class JwtService {
     return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
   }
 
-  public String generateToken(String email) {
+  public String generateToken(String email, int userId) {
     return Jwts.builder() 
       .subject(email)
+      .claim("userId", userId)
       .issuedAt(new Date())
       .expiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
       .signWith(getSigningKey())
@@ -50,6 +51,15 @@ public class JwtService {
       .parseSignedClaims(token)
       .getPayload()
       .getSubject();
+  }
+
+  public int extractUserId(String token) {
+    return Jwts.parser()
+      .verifyWith(getSigningKey())
+      .build()
+      .parseSignedClaims(token)
+      .getPayload()
+      .get("userId", Integer.class);
   }
 
   public boolean isTokenValid(String token) {

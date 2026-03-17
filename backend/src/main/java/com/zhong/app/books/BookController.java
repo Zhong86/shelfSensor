@@ -24,7 +24,7 @@ public class BookController {
   }
 
   @GetMapping()
-  public ResponseEntity<Page<BookResponse>> getBooks(
+  public ResponseEntity<Page<BookResponse>> GetBooks(
     @RequestParam(defaultValue = "0") int page, 
     @RequestParam(defaultValue = "5") int size
   ) {
