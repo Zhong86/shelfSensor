@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zhong.app.entries.dto.CreateUpdateEntryRequest;
+import com.zhong.app.entries.dto.EntryResponse;
+
 @RestController
 @RequestMapping("/api/v1/entries")
 public class EntryController {
@@ -31,8 +34,7 @@ public class EntryController {
     @RequestParam(required = false) Boolean favorite, 
     @RequestParam(required = false) String genre
   ) {
-    int userId = (int) SecurityContextHolder.getContext()
-      .getAuthentication().getDetails();
+    int userId = getUserId();
  
     return ResponseEntity.ok(entryService.getEntries(
       userId, page, size, status, favorite, genre

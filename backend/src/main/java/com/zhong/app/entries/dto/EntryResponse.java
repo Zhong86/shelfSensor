@@ -1,4 +1,4 @@
-package com.zhong.app.entries;
+package com.zhong.app.entries.dto;
 
 import com.zhong.app.books.Book;
 

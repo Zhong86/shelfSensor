@@ -1,6 +1,8 @@
-package com.zhong.app.entries;
+package com.zhong.app.entries.dto;
 
 import org.springframework.data.jpa.domain.Specification;
+
+import com.zhong.app.entries.UserBookEntry;
 
 public class EntrySpecification {
   public static Specification<UserBookEntry> hasUserId(Integer userId) {

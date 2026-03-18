@@ -31,3 +31,4 @@ A full-stack practice project built with **React** and **Java Spring Boot**. Thi
 - Users: CRUD <br>
 - Reviews: CUD, Get based on book_id <br>
 - Books: Get based on genre/author/rating <br>
+- UserBookEntry (Notes): CRUD, filter based on genre/favorite/status

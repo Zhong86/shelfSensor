@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.zhong.app.books.Book;
 import com.zhong.app.books.BookRepository;
+import com.zhong.app.entries.dto.CreateUpdateEntryRequest;
+import com.zhong.app.entries.dto.EntryResponse;
+import com.zhong.app.entries.dto.EntrySpecification;
 import com.zhong.app.users.User;
 import com.zhong.app.users.UserRepository;
 
 @Service
 public class EntryService {
-  private final EntryRepository entryRepository;
+ private final EntryRepository entryRepository;
   private final UserRepository userRepository; 
   private final BookRepository bookRepository; 
 
