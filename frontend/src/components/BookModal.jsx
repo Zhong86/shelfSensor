@@ -4,7 +4,8 @@ export default function BookModal({ book, onClose }) {
   const { user } = useApp(); 
 
   if (!book) return null; 
-
+  const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+  
   return (
     <div className="modal d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }} onClick={onClose}>
       <div className="modal-dialog modal-lg modal-dialog-centered" onClick={e => e.stopPropagation()}>
@@ -17,7 +18,7 @@ export default function BookModal({ book, onClose }) {
             <div className="row">
               <div className="col-md-4 mb-3 mb-md-0">
                 <img 
-                  src={book.coverUrl} 
+                  src={coverUrl} 
                   alt={book.title}
                   className="img-fluid rounded"
                   style={{ maxHeight: '300px', objectFit: 'cover' }}
@@ -52,7 +53,7 @@ export default function BookModal({ book, onClose }) {
             {user && (
               <button 
                 type="button" 
-                className={`btn ${isSaved ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                className={`btn ${isSaved ? 'btn-outline-cozy' : 'btn-cozy'}`}
                 onClick={handleSave}
               >
                 {isSaved ? 'Remove from Library' : 'Save to Library'}

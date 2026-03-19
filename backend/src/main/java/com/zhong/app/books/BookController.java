@@ -28,9 +28,11 @@ public class BookController {
   @GetMapping()
   public ResponseEntity<Page<BookResponse>> GetBooks(
     @RequestParam(defaultValue = "0") int page, 
-    @RequestParam(defaultValue = "5") int size
+    @RequestParam(defaultValue = "5") int size,
+    @RequestParam(required = false) String genre, 
+    @RequestParam(required = false) String author 
   ) {
-    return ResponseEntity.ok(bookService.getBooks(page, size));
+    return ResponseEntity.ok(bookService.getBooks(page, size, genre, author));
   }
 
   @GetMapping("/genres")

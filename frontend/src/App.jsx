@@ -1,7 +1,9 @@
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import { useApp } from './context/AppContext';
 import GeneralPage from './pages/GeneralPage';
+import AuthPage from './pages/AuthPage';
+import './App.css';
 
 function App() {
   const { user } = useApp();
@@ -9,7 +11,10 @@ function App() {
   return (
     <>
       <Header isLoggedIn={user} />
-      <GeneralPage />
+      <Routes>
+        <Route path="/" element={<GeneralPage />} />
+        <Route path="/login" element={<AuthPage />} />
+      </Routes>
     </>
   )
 }

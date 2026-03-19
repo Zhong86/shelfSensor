@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,10 +26,14 @@ public class BookService {
     return response; 
   }
 
-  public Page<BookResponse> getBooks(int page, int size) {
+  public Page<BookResponse> getBooks(int page, int size, String author, String genre) {
     PageRequest pageable = PageRequest.of(page, size); 
-    Page<Book> books = bookRepository.findAll(pageable); 
     
+    Specification<Book> spec = (root, query, cb) -> null;
+    if (author != null) spec = spec.and(BookSpecification.hasAuthor(author));
+    if (genre != null) spec = spec.and(BookSpecification.hasGenre(genre));
+
+    Page<Book> books = bookRepository.findAll(spec, pageable); 
     return books.map(book -> {
       BookResponse response = setBookResponseData(book);
       return response; 
@@ -37,9 +42,9 @@ public class BookService {
 
   public List<String> getGenres() {
     return genreRepository.findAll()
-      .stream()
-      .map(Genre::getName)
-      .collect(Collectors.toList());
+    .stream()
+    .map(Genre::getName)
+    .collect(Collectors.toList());
   }
 
   public BookResponse setBookResponseData(Book book) {

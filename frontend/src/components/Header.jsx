@@ -15,7 +15,7 @@ export default function Header({ isLoggedIn = false }) {
   
   return (
     <header style={{ backgroundColor: '#8B7355' }}>
-      <nav className='navbar py-3'>
+      <nav className='navbar py-3 navbar-expand-md navbar-cozy sticky-top'>
         <div 
           className='d-flex w-100 px-4 m-auto justify-content-between align-items-center'
         >
