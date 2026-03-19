@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
   private final BookRepository bookRepository; 
+  private final GenreRepository genreRepository; 
 
-  public BookService(BookRepository bookRepository) {
+  public BookService(BookRepository bookRepository, GenreRepository genreRepository) {
     this.bookRepository = bookRepository;
+    this.genreRepository = genreRepository;
   }
 
   public BookResponse getBookByIsbn(String isbn) {
@@ -31,6 +33,13 @@ public class BookService {
       BookResponse response = setBookResponseData(book);
       return response; 
     }); 
+  }
+
+  public List<String> getGenres() {
+    return genreRepository.findAll()
+      .stream()
+      .map(Genre::getName)
+      .collect(Collectors.toList());
   }
 
   public BookResponse setBookResponseData(Book book) {

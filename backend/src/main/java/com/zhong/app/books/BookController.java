@@ -1,5 +1,7 @@
 package com.zhong.app.books;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +31,10 @@ public class BookController {
     @RequestParam(defaultValue = "5") int size
   ) {
     return ResponseEntity.ok(bookService.getBooks(page, size));
+  }
+
+  @GetMapping("/genres")
+  public ResponseEntity<List<String>> GetGenres() {
+    return ResponseEntity.ok(bookService.getGenres());
   }
 }
