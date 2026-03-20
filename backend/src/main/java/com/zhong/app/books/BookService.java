@@ -50,6 +50,7 @@ public class BookService {
 
   public BookResponse setBookResponseData(Book book) {
     BookResponse response = new BookResponse(); 
+    response.setId(book.getId());
     response.setTitle(book.getTitle());
     response.setIsbn(book.getIsbn());
     response.setPublishedYear(book.getPublishedYear());

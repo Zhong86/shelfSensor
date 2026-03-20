@@ -3,6 +3,7 @@ package com.zhong.app.books;
 import java.util.List;
 
 public class BookResponse {
+  private Integer id;
   private String title; 
   private String isbn; 
   private int publishedYear; 
@@ -10,6 +11,12 @@ public class BookResponse {
   private List<String> authors; 
   private List<String> genres;
 
+  public Integer getId() {
+    return id;
+  }
+  public void setId(Integer id) {
+    this.id = id;
+  }
   public String getTitle() {
     return title;
   }
