@@ -26,10 +26,11 @@ public class BookService {
     return response; 
   }
 
-  public Page<BookResponse> getBooks(int page, int size, String author, String genre) {
+  public Page<BookResponse> getBooks(int page, int size, String title, String author, String genre) {
     PageRequest pageable = PageRequest.of(page, size); 
     
     Specification<Book> spec = (root, query, cb) -> null;
+    if (title != null) spec = spec.and(BookSpecification.hasTitle(title));
     if (author != null) spec = spec.and(BookSpecification.hasAuthor(author));
     if (genre != null) spec = spec.and(BookSpecification.hasGenre(genre));
 
