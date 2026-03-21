@@ -20,12 +20,12 @@ export function AppProvider({ children }) {
     .then(res => res.json())
     .then(data => {
       setToken(data.accessToken);  // restore token in api.js
-      const payload = JSON.parse(atob(data.accessToken.split('.')[1]));
-      setUser({ id: payload.userId, email: payload.sub });
-    })
-    .catch(() => {
-      localStorage.removeItem('refreshToken'); // refresh token expired, force logout
-    });
+        const payload = JSON.parse(atob(data.accessToken.split('.')[1]));
+        setUser({ id: payload.userId, email: payload.sub });
+      })
+      .catch(() => {
+        localStorage.removeItem('refreshToken'); // refresh token expired, force logout
+      });
   }, []);
 
   const login = async (email, password, name) => {

@@ -7,7 +7,7 @@ export default function Header({ isLoggedIn = false }) {
 
   const navLinks = [
     { href: '/', label: 'General' }, 
-    { href: '/personal', label: 'Personal' }, 
+    { href: '/collections', label: 'Collections' }, 
     { href: '/scanner', label: 'Scanner' }
   ];
 
@@ -100,7 +100,7 @@ export default function Header({ isLoggedIn = false }) {
                 </Link>
               ))}
               <Link
-                to="/login"
+                to={!isLoggedIn ? "/login" : "/profile"}
                 className="btn mt-2 px-3 py-2"
                 style={{
                   backgroundColor: 'white',

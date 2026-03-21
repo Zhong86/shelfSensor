@@ -7,10 +7,11 @@ export default function GeneralPage() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [books, setBooks] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [search, setSearch] = useState('');
-  const [filters, setFilters] = useState(); 
+  const [filters, setFilters] = useState({}); 
   const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
 
   //GET genres from DB
   useEffect(() => {
@@ -18,16 +19,30 @@ export default function GeneralPage() {
     Promise.all([GetGenres(), GetBooks()])
       .then(([genresData, booksData]) => {
         setGenres(genresData);
-        setBooks(booksData);
+        setBooks(booksData.content);
+        setTotalPages(booksData.totalPages);
       })
       .catch(err => console.log(err))
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    GetBooks(filters, page).then(b => setBooks(b.content));
+  }, [page]);
+
+  useEffect(() => {
+    if(!selectedBook) return; 
+    GetReviews(selectedBook.id).then(data => { 
+      setReviews(data);
+    });
+  }, [selectedBook]);
+
+
+
   const handleSearch = async (e) => {
     e.preventDefault();
 
-    if(!search && !filters) return; 
+    if(!filters) return; 
 
     setLoading(true);
     const books = await GetBooks(filters)
@@ -46,12 +61,11 @@ export default function GeneralPage() {
               type="text"
               className="form-control"
               placeholder="Search books..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setFilters(f => ({ ...f, title: e.target.value || null }))}
             />
           </div>
           <div className="row g-3 mb-4">
-            <div className='col-4'>
+            <div className='col-4 col-md-3'>
               <input
                 type='text'
                 className='form-control'
@@ -59,16 +73,16 @@ export default function GeneralPage() {
                 onChange={(e) => setFilters(f => ({ ...f, author: e.target.value || null }))}/>
             </div>
 
-            <div className='col-3'>
+            <div className='col-4 col-md-2'>
               <select 
                 className='form-select'
                 onChange={(e) => setFilters(f => ({ ...f, genre: e.target.value || null }))}>
-                <option value=''>Genres</option>
+                <option value=''>All Genres</option>
                 {genres.map(g => <option key={g} value={g}>{g}</option>)}
               </select>
             </div>
 
-            <div className='col-2'>
+            <div className='col-2 col-md-1'>
               <button type="submit" className='btn btn-cozy' 
                 onClick={handleSearch}
               >Search</button>
@@ -95,10 +109,29 @@ export default function GeneralPage() {
                 </div>
               )}
         </div>
+        <div className="d-flex justify-content-center align-items-center gap-2 mt-4">
+          <button 
+            className="btn btn-outline-secondary btn-sm"
+            disabled={page === 0}
+            onClick={() => setPage(p => p - 1)}
+          >
+            &laquo;
+          </button>
+
+          <span className="text-muted small">Page {page + 1} of {totalPages}</span>
+
+          <button 
+            className="btn btn-outline-secondary btn-sm"
+            disabled={page + 1 >= totalPages}
+            onClick={() => setPage(p => p + 1)}
+          >
+            &raquo;
+          </button>
+        </div>
       </div>
 
       {selectedBook && (
-        <BookModal book={selectedBook} onClose={() => setSelectedBook(null)} />
+        <BookModal book={selectedBook} reviews={reviews} onClose={() => setSelectedBook(null)} />
       )}
     </>
   );
@@ -108,17 +141,25 @@ async function GetBooks(filters = {}, page = 0, size = 9) {
   const params = {
     page: page, 
     size: size, 
-    genre: filters.genre?.toLowerCase() || null, 
-    author: filters.author?.toLowerCase() || null, 
   };
-  console.log(params);
+
+  if(filters.title && filters.title != null)
+    params.title = filters.title.toLowerCase();
+  if(filters.genre && filters.genre != null)
+    params.genre = filters.genre.toLowerCase();
+  if(filters.author && filters.author.toLowerCase())
+    params.author = filters.author.toLowerCase();
+
   const res = await api.getBooks(params);
-  console.log(res);
-  if(res != null) return res.content;
-  return [];
+  return res;
 }
 
 async function GetGenres() {
   const res = await api.getGenres();
   return res;
+}
+
+async function GetReviews(bookId) {
+  const res = await api.getReviews(bookId);
+  return res.content;
 }
