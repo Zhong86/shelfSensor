@@ -2,29 +2,33 @@ import { useEffect, useState } from 'react';
 import { api } from '../api.js';
 import BookCard from '../components/BookCard'; 
 import BookModal from '../components/BookModal';
+import { useApp } from '../context/AppContext';
 
 export default function GeneralPage() {
+  const { user, genres } = useApp();
   const [selectedBook, setSelectedBook] = useState(null);
   const [books, setBooks] = useState([]);
-  const [genres, setGenres] = useState([]);
   const [filters, setFilters] = useState({}); 
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
+  const [savedBookIds, setSavedBookIds] = useState(new Set());
 
-  //GET genres from DB
   useEffect(() => {
     setLoading(true);
-    Promise.all([GetGenres(), GetBooks()])
-      .then(([genresData, booksData]) => {
-        setGenres(genresData);
-        setBooks(booksData.content);
-        setTotalPages(booksData.totalPages);
-      })
-      .catch(err => console.log(err))
+    GetBooks().then(d => {
+      setBooks(d.content);
+      setTotalPages(d.totalPages);
+    }).catch(err => console.log(err))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    GetSavedBookIds().then(ids => setSavedBookIds(new Set(ids)));
+
+  }, [user]); 
 
   useEffect(() => {
     GetBooks(filters, page).then(b => setBooks(b.content));
@@ -36,8 +40,6 @@ export default function GeneralPage() {
       setReviews(data);
     });
   }, [selectedBook]);
-
-
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -131,7 +133,7 @@ export default function GeneralPage() {
       </div>
 
       {selectedBook && (
-        <BookModal book={selectedBook} reviews={reviews} onClose={() => setSelectedBook(null)} />
+        <BookModal book={selectedBook} reviews={reviews} savedIds={savedBookIds} setSavedBookIds={setSavedBookIds} onClose={() => setSelectedBook(null)} />
       )}
     </>
   );
@@ -154,12 +156,13 @@ async function GetBooks(filters = {}, page = 0, size = 9) {
   return res;
 }
 
-async function GetGenres() {
-  const res = await api.getGenres();
-  return res;
-}
-
 async function GetReviews(bookId) {
   const res = await api.getReviews(bookId);
   return res.content;
+}
+
+async function GetSavedBookIds() {
+  const res = await api.getSavedIds();
+  console.log(res);
+  return res;
 }

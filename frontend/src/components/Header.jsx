@@ -7,7 +7,6 @@ export default function Header({ isLoggedIn = false }) {
 
   const navLinks = [
     { href: '/', label: 'General' }, 
-    { href: '/collections', label: 'Collections' }, 
     { href: '/scanner', label: 'Scanner' }
   ];
 
@@ -56,7 +55,7 @@ export default function Header({ isLoggedIn = false }) {
                 fontWeight: 500,
               }}
             >
-              {isLoggedIn ? 'Profile' : 'Login'}
+              {isLoggedIn ? 'Collections' : 'Login'}
             </Link>
           </div>
 
@@ -100,7 +99,7 @@ export default function Header({ isLoggedIn = false }) {
                 </Link>
               ))}
               <Link
-                to={!isLoggedIn ? "/login" : "/profile"}
+                to={!isLoggedIn ? "/login" : "/collections"}
                 className="btn mt-2 px-3 py-2"
                 style={{
                   backgroundColor: 'white',
@@ -109,7 +108,7 @@ export default function Header({ isLoggedIn = false }) {
                 }}
                 onClick={() => setMenuOpen(false)}
               >
-                {isLoggedIn ? 'Profile' : 'Login'}
+                {isLoggedIn ? 'Collections' : 'Login'}
               </Link>
             </div>
           </div>

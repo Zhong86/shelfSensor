@@ -12,8 +12,9 @@ const authFetch = async (url, options = {}) => {
         'Content-Type': 'application/json'
       }
     });
-
+api.js
     if (!res.ok) throw new Error(await res.text());
+    if(res.status === 204) return null;
     return res.json();  
   } catch (error) {
     console.log(error.message);
@@ -30,6 +31,9 @@ export const api = {
   getReviews: (bookId) => authFetch(`${import.meta.env.VITE_API_REVIEWS}/${bookId}`),
   addReview: (body) => authFetch(import.meta.env.VITE_API_REVIEWS, 
     { method: 'POST', body: JSON.stringify(body) }),
+
+  //entry Ids
+  getSavedIds: () => authFetch(`${import.meta.env.VITE_API_ENTRIES}/ids`),
 
   //entries
   getEntries: (params) => authFetch(`${import.meta.env.VITE_API_ENTRIES}?${new URLSearchParams(params)}`),

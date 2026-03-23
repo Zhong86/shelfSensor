@@ -3,7 +3,7 @@ import Header from './components/Header';
 import { useApp } from './context/AppContext';
 import GeneralPage from './pages/GeneralPage';
 import AuthPage from './pages/AuthPage';
-import ProfilePage from './pages/ProfilePage';
+import CollectionPage from './pages/CollectionPage';
 import './App.css';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<GeneralPage />} />
         <Route path="/login" element={<AuthPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/collections" element={<CollectionPage />} />
       </Routes>
     </>
   )

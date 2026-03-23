@@ -31,13 +31,15 @@ public class EntryService {
     this.bookRepository = bookRepository;
   } 
 
-  public Page<EntryResponse> getEntries(int userId, int page, int size, String status, Boolean favorite, String genre) {
+  public Page<EntryResponse> getEntries(int userId, int page, int size, String title, String status, Boolean favorite, String genre) {
     PageRequest pageable = PageRequest.of(page, size);
     
     //Filters for param
     Specification<UserBookEntry> spec = Specification
       .where(EntrySpecification.hasUserId(userId));
     
+    if(title != null)
+      spec = spec.and(EntrySpecification.hasTitle(title));
     if(status != null) 
       spec = spec.and(EntrySpecification.hasStatus(UserBookEntry.ReadingStatus.valueOf(status)));
     if(favorite != null) 

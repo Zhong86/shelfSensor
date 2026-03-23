@@ -20,4 +20,11 @@ public class EntrySpecification {
   public static Specification<UserBookEntry> hasGenre(String genre) {
     return (root, query, cb) -> cb.equal(root.join("book").join("genres").get("name"), genre);
   }
+
+  public static Specification<UserBookEntry> hasTitle(String title) {
+    return (root, query, cb) -> cb.like(
+      cb.lower(root.join("book").get("title")), 
+      "%" + title.toLowerCase() + "%"
+    );
+  }
 }

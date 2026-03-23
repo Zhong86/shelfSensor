@@ -133,6 +133,12 @@ body {
   font-weight: 500;
 }
 
+.badge-favorite {
+  background-color: var(--cozy-brown-dark);
+  color: white;
+  font-weight: 500;
+}
+
 /* Empty state */
 .empty-state {
   text-align: center;
@@ -145,9 +151,7 @@ body {
   border-bottom-color: var(--cozy-beige);
 }
 
-.modal-cozy .modal-footer {
-  border-top-color: var(--cozy-beige);
-}
+
 
 /* Search */
 .search-box {

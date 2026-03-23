@@ -32,6 +32,7 @@ public class EntryController {
   public ResponseEntity<Page<EntryResponse>> GetEntries(
     @RequestParam(defaultValue = "0") int page, 
     @RequestParam(defaultValue = "5") int size, 
+    @RequestParam(required = false) String title,
     @RequestParam(required = false) String status, 
     @RequestParam(required = false) Boolean favorite, 
     @RequestParam(required = false) String genre
@@ -39,7 +40,7 @@ public class EntryController {
     int userId = getUserId();
  
     return ResponseEntity.ok(entryService.getEntries(
-      userId, page, size, status, favorite, genre
+      userId, page, size, title, status, favorite, genre
     ));
   }
 

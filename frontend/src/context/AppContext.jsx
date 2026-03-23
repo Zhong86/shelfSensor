@@ -1,25 +1,27 @@
 import { useEffect, createContext, useContext, useState } from 'react';
-import { setToken, clearToken } from '../api.js';
+import { setToken, clearToken, api } from '../api.js';
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null); 
-  const [entries, setEntries] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-  const refreshToken = localStorage.getItem('refreshToken');
-  if (!refreshToken) return;
+    GetGenres().then(d => setGenres(d));
 
-  // get new access token using refresh token
-  fetch(`${import.meta.env.VITE_API_AUTH}/refresh`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refreshToken })
-  })
-    .then(res => res.json())
-    .then(data => {
-      setToken(data.accessToken);  // restore token in api.js
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) return;
+
+    // get new access token using refresh token
+    fetch(`${import.meta.env.VITE_API_AUTH}/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken })
+    })
+      .then(res => res.json())
+      .then(data => {
+        setToken(data.accessToken);  // restore token in api.js
         const payload = JSON.parse(atob(data.accessToken.split('.')[1]));
         setUser({ id: payload.userId, email: payload.sub });
       })
@@ -58,11 +60,10 @@ export function AppProvider({ children }) {
   const logout = () => {
     clearToken();
     setUser(null);
-    setEntries(null);
     localStorage.removeItem('refreshToken');
   };
 
-  const value = { user, login, logout, entries, setEntries };
+  const value = { user, login, logout, genres };
 
   return (
     <AppContext.Provider value={value}>
@@ -78,4 +79,9 @@ export function useApp() {
   }
 
   return context;
+}
+
+async function GetGenres() {
+  const res = await api.getGenres();
+  return res;
 }
