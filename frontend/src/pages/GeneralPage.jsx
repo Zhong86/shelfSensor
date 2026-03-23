@@ -49,7 +49,8 @@ export default function GeneralPage() {
     setLoading(true);
     const books = await GetBooks(filters)
       .finally(() => setLoading(false));
-    setBooks(books);
+    setBooks(books.content);
+    setTotalPages(books.totalPages);
   };
 
   return (
