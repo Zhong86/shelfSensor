@@ -1,5 +1,7 @@
 package com.zhong.app.entries;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,12 @@ public class EntryController {
     return ResponseEntity.ok(entryService.getEntries(
       userId, page, size, status, favorite, genre
     ));
+  }
+
+  @GetMapping("/ids")
+  public ResponseEntity<List<Integer>> GetSavedBookIds() {
+    int userId = getUserId();
+    return ResponseEntity.ok(entryService.getSavedBookIds(userId));
   }
 
   @GetMapping("/{bookId}")

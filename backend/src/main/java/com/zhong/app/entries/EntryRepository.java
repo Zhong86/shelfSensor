@@ -15,6 +15,9 @@ import org.springframework.stereotype.Repository;
 public interface EntryRepository extends JpaRepository<UserBookEntry, UserBookId>, JpaSpecificationExecutor<UserBookEntry>{
   Optional<Page<UserBookEntry>> findByUserId(int userId, Pageable page);
 
+  @Query("SELECT e.id.bookId FROM UserBookEntry e WHERE e.id.userId = :userId")
+List<Integer> findBookIdsByUserId(@Param("userId") int userId);
+
   @Query(value="SELECT * FROM user_books WHERE user_id = :userId AND book_id = :bookId", 
     nativeQuery = true)
   Optional<UserBookEntry> findByBookId(

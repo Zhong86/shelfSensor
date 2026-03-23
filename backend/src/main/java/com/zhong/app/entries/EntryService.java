@@ -1,5 +1,7 @@
 package com.zhong.app.entries;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,6 +20,10 @@ public class EntryService {
  private final EntryRepository entryRepository;
   private final UserRepository userRepository; 
   private final BookRepository bookRepository; 
+
+  public List<Integer> getSavedBookIds(int userId) {
+    return entryRepository.findBookIdsByUserId(userId);
+  }
 
   public EntryService(EntryRepository entryRepository, BookRepository bookRepository, UserRepository userRepository) {
     this.entryRepository = entryRepository;
