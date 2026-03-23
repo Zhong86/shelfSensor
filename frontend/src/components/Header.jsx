@@ -47,16 +47,37 @@ export default function Header({ isLoggedIn = false, logout }) {
               </Link>
             ))}
             <Link
-              to="/login"
-              className="btn btn-sm ms-2 px-3 py-2"
+              to={!isLoggedIn ? "/login" : "/collections"}
+              className="text-decoration-none px-3 py-2 rounded"
               style={{
-                backgroundColor: 'white',
-                color: '#6B5344',
-                fontWeight: 500,
+                color: 'white',
+                backgroundColor: isActive('/login') || isActive('/collections')? 'rgba(255,255,255,0.2)' : 'transparent',
+                fontWeight: isActive('/login') || isActive('/collections') ? 600 : 400,
               }}
+              onClick={() => setMenuOpen(false)}
             >
               {isLoggedIn ? 'Collections' : 'Login'}
             </Link>
+            {isLoggedIn && (
+              <button
+                className="btn btn-sm ms-2 px-3 py-2 text-center"
+                style={{ 
+                  backgroundColor: 'white',
+                color: '#6B5344',
+                fontWeight: 500,
+                }}
+                onClick={() => {
+                  if (window.confirm('Are you sure you want to log out?')) {
+                    logout();
+                    setMenuOpen(false);
+                    window.alert('Successfully logged out!');
+                  }
+                }}
+              >
+                Log Out
+              </button>
+            )}
+
           </div>
 
           { /* Mobile */ }
@@ -72,12 +93,12 @@ export default function Header({ isLoggedIn = false, logout }) {
                 <line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            )}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              )}
           </button>
         </div>
         {menuOpen && (
