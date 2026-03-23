@@ -7,11 +7,11 @@ import CollectionPage from './pages/CollectionPage';
 import './App.css';
 
 function App() {
-  const { user } = useApp();
+  const { user, logout } = useApp();
 
   return (
     <>
-      <Header isLoggedIn={user} />
+      <Header isLoggedIn={user} logout={logout} />
       <Routes>
         <Route path="/" element={<GeneralPage />} />
         <Route path="/login" element={<AuthPage />} />

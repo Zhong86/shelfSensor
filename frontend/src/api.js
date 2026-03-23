@@ -33,7 +33,7 @@ export const api = {
     { method: 'POST', body: JSON.stringify(body) }),
 
   //entry Ids
-  getSavedIds: () => authFetch(`${import.meta.env.VITE_API_ENTRIES}/ids`),
+  getSavedIds: () => authFetch(`${import.meta.env.VITE_API_ENTRIES}/saved-ids`),
 
   //entries
   getEntries: (params) => authFetch(`${import.meta.env.VITE_API_ENTRIES}?${new URLSearchParams(params)}`),

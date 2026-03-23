@@ -1,7 +1,7 @@
 import { useState } from 'react'; 
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Header({ isLoggedIn = false }) {
+export default function Header({ isLoggedIn = false, logout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -81,7 +81,7 @@ export default function Header({ isLoggedIn = false }) {
           </button>
         </div>
         {menuOpen && (
-          <div className="d-md-none mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+          <div className="d-md-none pt-3 m-auto w-100" style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}>
             <div className="d-flex flex-column gap-2">
               {navLinks.map((link) => (
                 <Link
@@ -102,14 +102,33 @@ export default function Header({ isLoggedIn = false }) {
                 to={!isLoggedIn ? "/login" : "/collections"}
                 className="btn mt-2 px-3 py-2"
                 style={{
-                  backgroundColor: 'white',
-                  color: '#6B5344',
-                  fontWeight: 500,
+                  color: 'white',
+                  backgroundColor: isActive('/login') || isActive('/collections')? 'rgba(255,255,255,0.2)' : 'transparent',
+                  fontWeight: isActive('/login') || isActive('/collections') ? 600 : 400,
                 }}
                 onClick={() => setMenuOpen(false)}
               >
                 {isLoggedIn ? 'Collections' : 'Login'}
               </Link>
+              {isLoggedIn && (
+                <button
+                  className="btn mt-1 px-3 py-2 text-center"
+                  style={{ 
+                    color: 'white', 
+                    backgroundColor: 'transparent', 
+                    fontWeight: 600
+                  }}
+                  onClick={() => {
+                    if (window.confirm('Are you sure you want to log out?')) {
+                      logout();
+                      setMenuOpen(false);
+                      window.alert('Successfully logged out!');
+                    }
+                  }}
+                >
+                  Log Out
+                </button>
+              )}
             </div>
           </div>
         )}

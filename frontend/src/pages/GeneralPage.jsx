@@ -163,6 +163,5 @@ async function GetReviews(bookId) {
 
 async function GetSavedBookIds() {
   const res = await api.getSavedIds();
-  console.log(res);
   return res;
 }

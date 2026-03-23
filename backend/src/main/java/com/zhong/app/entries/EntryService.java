@@ -51,12 +51,6 @@ public class EntryService {
     return entries.map(entry -> setEntryResponseData(entry));
   }
 
-  public EntryResponse getEntryByBookId(int userId, int bookId) {
-    UserBookEntry entry = entryRepository.findByBookId(userId, bookId)
-      .orElseThrow(() -> new RuntimeException("User or Book not found"));
-    return setEntryResponseData(entry);
-  }
-
   public EntryResponse addEntry(int userId, CreateUpdateEntryRequest req) {
     User user = userRepository.getReferenceById(userId);
     Book book = bookRepository.getReferenceById(req.getBookId());

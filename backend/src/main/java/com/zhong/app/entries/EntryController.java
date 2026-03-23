@@ -44,19 +44,10 @@ public class EntryController {
     ));
   }
 
-  @GetMapping("/ids")
+  @GetMapping("/saved-ids")
   public ResponseEntity<List<Integer>> GetSavedBookIds() {
     int userId = getUserId();
     return ResponseEntity.ok(entryService.getSavedBookIds(userId));
-  }
-
-  @GetMapping("/{bookId}")
-  public ResponseEntity<EntryResponse> GetEntry(
-    @PathVariable int bookId
-  ) {
-    int userId = getUserId();
-    EntryResponse entry = entryService.getEntryByBookId(userId, bookId);
-    return ResponseEntity.ok(entry);
   }
 
   @PostMapping()
