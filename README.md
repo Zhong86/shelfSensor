@@ -19,7 +19,6 @@ A full-stack practice project built with **React** and **Java Spring Boot**. Thi
 - Set reading status: `READING` · `READ LATER` · `COMPLETED` <br>
 - Favorite books for quick access <br>
 - Add personal notes <br>
-- Give reviews for others to see <br>
 
 ## Production & Deployment
 - Simple React app with Vite <br>
