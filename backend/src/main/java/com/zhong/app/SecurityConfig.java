@@ -38,6 +38,7 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
+        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
         .requestMatchers("/api/v1/auth/**").permitAll() // login/register open
         .requestMatchers("/api/v1/books/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()
@@ -52,7 +53,11 @@ public class SecurityConfig {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
-    config.setAllowedOrigins(List.of("http://localhost:5173"));
+    config.setAllowedOrigins(List.of(
+      "http://localhost:5173",
+      "https://localhost:5173",
+      "https://192.168.1.11:5173"
+    ));
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
     config.setAllowedHeaders(List.of("*"));
     config.setAllowCredentials(true);

@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { useApp } from '../context/AppContext';
 import { api } from '../api.js';
 
-export default function BookModal({ book, reviews = [], savedIds, setSavedBookIds, onClose }) {
+export default function BookModal({ book, onClose }) {
   const { user } = useApp();
-  const isSaved = savedIds.has(book.id);
   const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
   
   const [showForm, setShowForm] = useState(false);
@@ -12,6 +11,24 @@ export default function BookModal({ book, reviews = [], savedIds, setSavedBookId
   const [notes, setNotes] = useState('');
   const [favorite, setFavorite] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [savedIds, setSavedBookIds] = useState(new Set());
+
+  var isSaved = false;
+
+  useEffect(() => {
+    if (!user) return;
+    GetSavedBookIds()
+      .then(ids => setSavedBookIds(new Set(ids)))
+      .then(isSaved = savedIds.has(book.id));
+  }, [user]);
+
+  useEffect(() => {
+    if(!book) return; 
+    GetReviews(book.id).then(data => { 
+      setReviews(data);
+    });
+  }, [book]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -143,20 +160,18 @@ export default function BookModal({ book, reviews = [], savedIds, setSavedBookId
               </button>
             </div>
           )}
-          { /* user && (
-            <div className="mb-3">
-              <button 
-                type="button" 
-                className={`btn m-auto ${isSaved ? 'btn-outline-cozy' : 'btn-cozy'}`}
-                onClick={handleSave}
-              >
-                {isSaved ? 'Remove from Library' : 'Save to Library'}
-              </button>
-            </div>
-          ) */}
         </div>
       </div>
     </div>
   );
 }
 
+async function GetReviews(bookId) {
+  const res = await api.getReviews(bookId);
+  return res.content;
+}
+
+async function GetSavedBookIds() {
+  const res = await api.getSavedIds();
+  return res;
+}

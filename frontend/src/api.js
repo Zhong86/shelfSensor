@@ -4,21 +4,19 @@ export const setToken = (token) => accessToken = token;
 export const clearToken = () => accessToken = null; 
 
 const authFetch = async (url, options = {}) => {
-  try {
-    const res = await fetch(url, {
-      ...options, 
-      headers: {
-        'Authorization': `Bearer ${accessToken}`, 
-        'Content-Type': 'application/json'
-      }
-    });
-api.js
-    if (!res.ok) throw new Error(await res.text());
-    if(res.status === 204) return null;
-    return res.json();  
-  } catch (error) {
-    console.log(error.message);
-  }
+  const res = await fetch(url, {
+    ...options, 
+    headers: {
+      'Authorization': `Bearer ${accessToken}`, 
+      'Content-Type': 'application/json'
+    }
+  });
+  if(res.status === 204) return null;
+  
+  const data = await res.json();
+
+  if (!res.ok) throw new Error(data.message || "Something went wrong");
+  return data;
 };
 
 export const api = {

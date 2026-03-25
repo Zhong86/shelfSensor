@@ -4,6 +4,7 @@ import { useApp } from './context/AppContext';
 import GeneralPage from './pages/GeneralPage';
 import AuthPage from './pages/AuthPage';
 import CollectionPage from './pages/CollectionPage';
+import ScannerPage from './pages/ScannerPage';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<GeneralPage />} />
         <Route path="/login" element={<AuthPage />} />
+        <Route path='/scanner' element={<ScannerPage />} />
         <Route path="/collections" element={<CollectionPage />} />
       </Routes>
     </>

@@ -29,6 +29,12 @@ public class JwtAuthFilter extends OncePerRequestFilter{
     HttpServletResponse res, 
     FilterChain chain) 
   throws ServletException, IOException {
+    //skip JWT check for OPTIONS
+    if (req.getMethod().equals("OPTIONS")) {
+      chain.doFilter(req, res);
+      return;
+    }
+
     String authHeader = req.getHeader("Authorization");
 
     if (authHeader == null || !authHeader.startsWith("Bearer")) {
@@ -43,10 +49,10 @@ public class JwtAuthFilter extends OncePerRequestFilter{
       int userId = jwtService.extractUserId(token);
 
       UserDetails userDetails = userDetailsService.loadUserByUsername(email); 
-      
+
       UsernamePasswordAuthenticationToken authToken = 
-        new UsernamePasswordAuthenticationToken(
-          userDetails, null, userDetails.getAuthorities());
+      new UsernamePasswordAuthenticationToken(
+        userDetails, null, userDetails.getAuthorities());
 
       authToken.setDetails(userId);
       SecurityContextHolder.getContext().setAuthentication(authToken);

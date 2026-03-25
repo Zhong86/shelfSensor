@@ -5,15 +5,13 @@ import BookModal from '../components/BookModal';
 import { useApp } from '../context/AppContext';
 
 export default function GeneralPage() {
-  const { user, genres } = useApp();
+  const { genres } = useApp();
   const [selectedBook, setSelectedBook] = useState(null);
   const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState({}); 
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [reviews, setReviews] = useState([]);
-  const [savedBookIds, setSavedBookIds] = useState(new Set());
 
   useEffect(() => {
     setLoading(true);
@@ -25,21 +23,8 @@ export default function GeneralPage() {
   }, []);
 
   useEffect(() => {
-    if (!user) return;
-    GetSavedBookIds().then(ids => setSavedBookIds(new Set(ids)));
-
-  }, [user]); 
-
-  useEffect(() => {
     GetBooks(filters, page).then(b => setBooks(b.content));
   }, [page]);
-
-  useEffect(() => {
-    if(!selectedBook) return; 
-    GetReviews(selectedBook.id).then(data => { 
-      setReviews(data);
-    });
-  }, [selectedBook]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -134,7 +119,7 @@ export default function GeneralPage() {
       </div>
 
       {selectedBook && (
-        <BookModal book={selectedBook} reviews={reviews} savedIds={savedBookIds} setSavedBookIds={setSavedBookIds} onClose={() => setSelectedBook(null)} />
+        <BookModal book={selectedBook} onClose={() => setSelectedBook(null)} />
       )}
     </>
   );
@@ -154,15 +139,5 @@ async function GetBooks(filters = {}, page = 0, size = 9) {
     params.author = filters.author.toLowerCase();
 
   const res = await api.getBooks(params);
-  return res;
-}
-
-async function GetReviews(bookId) {
-  const res = await api.getReviews(bookId);
-  return res.content;
-}
-
-async function GetSavedBookIds() {
-  const res = await api.getSavedIds();
   return res;
 }
